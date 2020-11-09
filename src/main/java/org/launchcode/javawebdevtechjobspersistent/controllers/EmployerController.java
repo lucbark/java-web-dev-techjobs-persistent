@@ -20,7 +20,8 @@ public class EmployerController {
     private EmployerRepository employerRepository; //1
 
     @GetMapping("add")
-    public String displayAddEmployerForm(Model model) {
+    public String displayAddEmployerForm(@RequestParam(required = false)  Integer employerId, Model model) {
+
         model.addAttribute(new Employer());
         return "employers/add";
     }
@@ -35,7 +36,11 @@ public class EmployerController {
         employerRepository.save(newEmployer);//2
         return "redirect:";
     }
-
+    @RequestMapping("")
+    public String index(Model model){
+        model.addAttribute("employers",employerRepository.findAll());
+        return "employers/index";
+    }
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 

@@ -36,6 +36,12 @@ public class SkillController {
         return "redirect:";
     }
 
+    @RequestMapping("") //
+    public String index(Model model) {
+        model.addAttribute("skills", skillRepository.findAll());
+        return "skills/index";
+    }
+
     @GetMapping("view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
 
@@ -48,6 +54,7 @@ public class SkillController {
             return "redirect:../";
         }
     }
+
 
 
 }

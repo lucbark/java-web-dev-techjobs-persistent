@@ -7,19 +7,19 @@ import javax.validation.constraints.Size;
 @Entity
 public class Skill extends AbstractEntity {
     @NotBlank(message = "You forgot to add a description of skill(s)...")
-    private String fullDescription;
+    private String description;
 
     public Skill (String fullDescriptionOfSkill) {
-        this.fullDescription = fullDescriptionOfSkill;
+        this.description = fullDescriptionOfSkill;
     }
 
     public Skill (){}
 
-    public String getFullDescription() {
-        return fullDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFullDescription(String fullDescription) {
-        this.fullDescription = fullDescription;
+    public void setDescription(String fullDescription) {
+        this.description = fullDescription;
     }
 }

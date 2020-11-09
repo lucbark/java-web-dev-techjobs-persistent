@@ -1,23 +1,27 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Job{
+public class Job extends AbstractEntity{ // Update job model
 
-    @Id
-    @GeneratedValue
-    private int id;
+//    @Id 1
+//    @GeneratedValue
+//    private int id;
+//
+//   private String name;
 
-    private String name;
+    @ManyToOne //3
+    @NotNull(message = "This is important stuff that cannot be left blank")
+    private Employer employer; //2 I may have many employer in Employer category
 
-    private String employer;
     private String skills;
 
     public Job() {
     }
 
-    public Job(String anEmployer, String someSkills) {
+    public Job(Employer anEmployer, String someSkills) {
         super();
         this.employer = anEmployer;
         this.skills = someSkills;
@@ -25,19 +29,20 @@ public class Job{
 
     // Getters and setters.
 
-    public String getName() {
-        return name;
-    }
+//    public String getName() { 1
+//        return name;
+//    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) { 1
+//        this.name = name;
+//    }
 
-    public String getEmployer() {
+
+    public Employer getEmployer() { //2
         return employer;
     }
 
-    public void setEmployer(String employer) {
+    public void setEmployer(Employer employer) { //2
         this.employer = employer;
     }
 
