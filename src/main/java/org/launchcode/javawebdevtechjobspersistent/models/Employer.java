@@ -12,13 +12,14 @@ import java.util.List;
 @Entity
 public class Employer extends AbstractEntity {
 
-    @NotBlank(message = "Where is it?")
+    @NotBlank(message = "Where is it?") //Part 2 Models Step 1 location field and annotations
     @Size(min = 1, max = 255, message = "Location name can be between 1 and 255 characters.")
     private String location;
 
-    @OneToMany() //one repository with many jobs
-    //@JoinColumn
-    private final List<Job> jobs = new ArrayList<>();
+    @OneToMany
+    @JoinColumn(name = "employer_id") //2 Use the OneToMany and JoinColumn annotations to declare relationship
+    // between the data tables
+    private List<Job> jobs = new ArrayList<>(); //add jobs and initialize it to an empty Arraylist
 
     public List<Job> getJobs() {
         return jobs;

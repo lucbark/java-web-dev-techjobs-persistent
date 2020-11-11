@@ -8,14 +8,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@MappedSuperclass
+@MappedSuperclass //Part 2 Step 1
 public abstract class AbstractEntity {
 
-    @Id
+    @Id//Part 2 Step 2
     @GeneratedValue
     private int id;
 
-    @NotBlank(message = "You MUST include a name!")
+    @NotBlank(message = "You MUST include a name!")// Part 2 Step 3 name field and validation
     @Size(min = 1, max = 255, message = "Name can be between 1 and 255 characters.")
     private String name;
 

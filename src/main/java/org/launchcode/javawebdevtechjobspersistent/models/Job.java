@@ -2,6 +2,8 @@ package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Job extends AbstractEntity{ // Update job model
@@ -12,20 +14,34 @@ public class Job extends AbstractEntity{ // Update job model
 //
 //   private String name;
 
-    @ManyToOne //3
+    @ManyToOne //3 Add a many to one annotation on the field employer
     @NotNull(message = "This is important stuff that cannot be left blank")
-    private Employer employer; //2 I may have many employer in Employer category
+    private Employer employer; //2 Replace the type of the field employer to be of type Employer
 
-    private String skills;
+    //private String skills;
+    @ManyToMany
+    @NotNull(message = "Please put something... Anything!")
+    private List<Skill> skills = new ArrayList<>();
 
     public Job() {
     }
 
-    public Job(Employer anEmployer, String someSkills) {
-        super();
-        this.employer = anEmployer;
-        this.skills = someSkills;
+    public Job(@NotNull(message = "This is important stuff that cannot be left blank") Employer employer, List<Skill> skills) {
+        this.employer = employer;
+        this.skills = skills;
     }
+
+    public void addSkills(Skill skill) {
+        this.skills.add(skill);
+    }
+
+    //    public Job(Employer anEmployer, List<Skill> someSkills) {
+//        super();
+//        this.employer = anEmployer;
+//        this.skills = someSkills;
+//    }
+
+
 
     // Getters and setters.
 
@@ -46,11 +62,11 @@ public class Job extends AbstractEntity{ // Update job model
         this.employer = employer;
     }
 
-    public String getSkills() {
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
 }
