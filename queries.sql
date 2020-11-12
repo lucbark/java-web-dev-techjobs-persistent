@@ -7,14 +7,12 @@ SELECT name FROM techjobs.employer
  WHERE location = 'St. Louis City ';
 ## Part 3: Test it with SQL
 --Write the Sql statement to remove the job table
-DROP TABLE job
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE job;
+SET FOREIGN_KEY_CHECKS=1;
 ## Part 4: Test it with SQL
-
-
-SELECT name, description
-FROM skill
-INNER JOIN job_skills ON skill.id = skills_id;
-
-SELECT name, description
-FROM skill
-ORDER BY name, description;
+SELECT skill.name, skill.description
+FROM skill, job_skills, job
+WHERE job_skills.skills_id = skill.id
+AND job_skills.jobs_id = job.id
+ORDER BY skill.name, skill.description
