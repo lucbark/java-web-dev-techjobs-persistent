@@ -6,9 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
-@Repository //Tells Spring that this is a class that should be made available to other parts of the app and creates
-// an instance in case it is needed
 
-
+@Repository
 public interface EmployerRepository extends CrudRepository<Employer, Integer> {
 }

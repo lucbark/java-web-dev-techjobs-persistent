@@ -43,6 +43,10 @@ public class ListController {
     @RequestMapping("")
     public String list(Model model) {
         // pass employer and skill data from repositories into the view template rendered list/
+        //        model.addAttribute("employer", employerRepository.findAll());
+
+        model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute("employers", employerRepository.findAll());
 
         return "list";
     }
@@ -57,7 +61,7 @@ public class ListController {
             jobs = JobData.findByColumnAndValue(column, value, jobRepository.findAll());
             model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
         }
-//        model.addAttribute("jobs", jobs);
+        model.addAttribute("jobs", jobs);
 //        model.addAttribute("skill", skillRepository.findAll());
 //        model.addAttribute("employer", employerRepository.findAll());
 

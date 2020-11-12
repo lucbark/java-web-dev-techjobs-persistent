@@ -9,3 +9,12 @@ SELECT name FROM techjobs.employer
 --Write the Sql statement to remove the job table
 DROP TABLE job
 ## Part 4: Test it with SQL
+
+
+SELECT name, description
+FROM skill
+INNER JOIN job_skills ON skill.id = skills_id;
+
+SELECT name, description
+FROM skill
+ORDER BY name, description;

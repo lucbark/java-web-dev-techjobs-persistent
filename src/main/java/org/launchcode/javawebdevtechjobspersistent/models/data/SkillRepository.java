@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-
 public interface SkillRepository extends CrudRepository<Skill, Integer> {
 }

@@ -40,41 +40,49 @@ public class HomeController {
     public String index(Model model) {
 
         model.addAttribute("title", "My Jobs");
+        model.addAttribute("jobs", jobRepository.findAll()); //add the "jobs" attribute key (mapping to the jobRepository.findAll() value).
 
         return "index";
     }
 
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
-        model.addAttribute("title", "Add Job");
+        //model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
         model.addAttribute("skills", skillRepository.findAll());
         model.addAttribute("employers", employerRepository.findAll());//2 Variables match templates/add variable name
-        model.addAttribute("jobs", jobRepository.findAll());
+        //I do not need job repository since I am adding a new job.
         return "add";
     }
 
 
 
-    @PostMapping("add")
+    @PostMapping("add") //Part 4 HomeController Again @RequestParam List<Integer> skills
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                     Errors errors, Model model, @RequestParam int employerId, //employerId Part 3 Step 4
                                     @RequestParam List<Integer> skills) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Job");
+            model.addAttribute("title", "Add Jobs");
             return "add";
         }
 
         // use employerId to select employer object
 
-        Optional<Employer> optEmployer = employerRepository.findById(employerId); //employerId comes from the parameter
-        if (optEmployer.isPresent()) {
-            Employer employer = (Employer) optEmployer.get();
-            newJob.setEmployer(employer);
-            //jobRepository.save(newJob);
-        }
-        //        Part4
+
+
+//I think both ways work...
+//        Optional<Employer> optEmployer = employerRepository.findById(employerId); //employerId comes from the parameter
+//        Employer employer = optEmployer.get();
+//        newJob.setEmployer(employer);
+
+//          OR
+        Employer employer = employerRepository.findById(employerId).orElse(new Employer());
+        newJob.setEmployer(employer);
+//
+//
+//        //Part4 Then, to get the skills data from a list of ids (rather than a single id as we did with
+//        // employer), use the CrudRepository method .findAllById(ids).
        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills); //skills comes from the parameter
      newJob.setSkills(skillObjs);
 

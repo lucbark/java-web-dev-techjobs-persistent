@@ -15,7 +15,7 @@ public class Skill extends AbstractEntity {
 
     @ManyToMany( mappedBy = "skills")
     @NotNull(message = "Please put something... Anything!")
-    private List<Job> jobs = new ArrayList<>();
+    private List<Job> jobs = new ArrayList<>(); //Part 4 add a jobs field
 
     public Skill (String fullDescriptionOfSkill) {
         this.description = fullDescriptionOfSkill;

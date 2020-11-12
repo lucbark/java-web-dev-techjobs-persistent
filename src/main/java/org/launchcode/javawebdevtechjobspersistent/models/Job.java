@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
 
 @Entity
 public class Job extends AbstractEntity{ // Update job model
@@ -15,20 +16,21 @@ public class Job extends AbstractEntity{ // Update job model
 //   private String name;
 
     @ManyToOne //3 Add a many to one annotation on the field employer
-    @NotNull(message = "This is important stuff that cannot be left blank")
+    //@NotNull(message = "This is important stuff that cannot be left blank")
     private Employer employer; //2 Replace the type of the field employer to be of type Employer
 
     //private String skills;
     @ManyToMany
-    @NotNull(message = "Please put something... Anything!")
-    private List<Skill> skills = new ArrayList<>();
+    //@NotNull(message = "Please put something... Anything!")
+    private List<Skill> skills = new ArrayList<>(); //Part4 update Job model class
 
-    public Job() {
+
+    public Job(@NotNull(message = "This is important stuff that cannot be left blank") Employer anEmployer, List<Skill> someSkills) {
+        this.employer = anEmployer;
+        this.skills = someSkills;
     }
 
-    public Job(@NotNull(message = "This is important stuff that cannot be left blank") Employer employer, List<Skill> skills) {
-        this.employer = employer;
-        this.skills = skills;
+    public Job() {
     }
 
     public void addSkills(Skill skill) {
