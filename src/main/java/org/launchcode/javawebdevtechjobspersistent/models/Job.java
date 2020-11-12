@@ -26,6 +26,7 @@ public class Job extends AbstractEntity{ // Update job model
 
 
     public Job(@NotNull(message = "This is important stuff that cannot be left blank") Employer anEmployer, List<Skill> someSkills) {
+        super();
         this.employer = anEmployer;
         this.skills = someSkills;
     }

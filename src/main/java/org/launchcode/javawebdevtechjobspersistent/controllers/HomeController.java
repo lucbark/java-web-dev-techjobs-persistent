@@ -59,11 +59,14 @@ public class HomeController {
 
     @PostMapping("add") //Part 4 HomeController Again @RequestParam List<Integer> skills
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
-                                    Errors errors, Model model, @RequestParam int employerId, //employerId Part 3 Step 4
-                                    @RequestParam List<Integer> skills) {
+                                    Errors errors, Model model, @RequestParam int employerId,
+                                    @RequestParam(defaultValue = "0") List<Integer> skills) {
+        //only redirect if name is blank and employer/skill is selected.
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Jobs");
+            model.addAttribute("skills", skillRepository.findAll());
+            model.addAttribute("employers", employerRepository.findAll());
             return "add";
         }
 
@@ -71,12 +74,6 @@ public class HomeController {
 
 
 
-//I think both ways work...
-//        Optional<Employer> optEmployer = employerRepository.findById(employerId); //employerId comes from the parameter
-//        Employer employer = optEmployer.get();
-//        newJob.setEmployer(employer);
-
-//          OR
         Employer employer = employerRepository.findById(employerId).orElse(new Employer());
         newJob.setEmployer(employer);
 //
